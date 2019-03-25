@@ -35,7 +35,7 @@ def main():
     #Trim and (insert new) Fasttext vectors
     word_to_idx, idx_to_word = load_vocab(config.filename_words)
     export_trimmed_fasttext_vectors(word_to_idx, idx_to_word, config.filename_fasttext,
-                                config.filename_fasttext_trimmed, config.dim_word, config.filename_oov_results_vector,
+                                config.filename_fasttext_trimmed, config.dim_word, config.filename_oov_result_vectors,
                                     config.use_fasttext_oov_vector_gen)
 
     # Build and save char vocab

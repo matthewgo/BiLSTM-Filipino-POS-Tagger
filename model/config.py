@@ -1,4 +1,5 @@
 import os
+from root import ROOT_DIR
 
 
 from .general_utils import get_logger
@@ -53,7 +54,7 @@ class Config():
         self.embeddings = (data_utils.get_trimmed_fasttext_vectors(self.filename_fasttext_trimmed)
                 if self.use_pretrained else None)
 
-    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
     # general config
     dir_output = os.path.join(ROOT_DIR, "results/test-filipino-pos/")
@@ -67,8 +68,8 @@ class Config():
 
     #fastText files
     fasttext_folder = os.path.join(ROOT_DIR, 'data/fasttext-filipino/')
-    filename_fasttext= fasttext_folder + "wiki.tl.vec"
-    filename_fasttext_trimmed = fasttext_folder + "wiki.tl.vec.trimmed.npz"
+    filename_fasttext= fasttext_folder + "cc.tl.300.vec"
+    filename_fasttext_trimmed = fasttext_folder + "cc.tl.300.vec.trimmed.npz"
     use_pretrained = True
 
     # dataset
