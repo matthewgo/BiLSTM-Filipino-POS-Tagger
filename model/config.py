@@ -53,9 +53,10 @@ class Config():
         self.embeddings = (data_utils.get_trimmed_fasttext_vectors(self.filename_fasttext_trimmed)
                 if self.use_pretrained else None)
 
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
     # general config
-    dir_output = "results/test-filipino-pos/"
+    dir_output = os.path.join(ROOT_DIR, "results/test-filipino-pos/")
     dir_model  = dir_output + "model.weights/"
     path_log   = dir_output + "log.txt"
 
@@ -65,13 +66,13 @@ class Config():
 
 
     #fastText files
-    fasttext_folder = 'data/fasttext-filipino/'
+    fasttext_folder = os.path.join(ROOT_DIR, 'data/fasttext-filipino/')
     filename_fasttext= fasttext_folder + "wiki.tl.vec"
     filename_fasttext_trimmed = fasttext_folder + "wiki.tl.vec.trimmed.npz"
     use_pretrained = True
 
     # dataset
-    folder = "data/filipino-pos/"
+    folder = os.path.join(ROOT_DIR, "data/filipino-pos/")
     filename_dev = folder + 'dev.txt'
     filename_test = folder + 'test.txt'
     filename_train = folder + 'train.txt'
