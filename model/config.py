@@ -108,4 +108,4 @@ class Config():
 
     use_fasttext_oov_vector_gen = True
 
-    filename_oov_result_vectors = fasttext_folder + 'oov_vectors.vec'
+    filename_oov_result_vectors = folder + 'oov_vectors.vec'

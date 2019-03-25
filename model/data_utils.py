@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import subprocess
+from root import ROOT_DIR
 
 
 # shared global variables to be imported from model also
@@ -206,7 +207,7 @@ def generate_fasttext_oov_vectors(oov_words, oov_words_filename, oov_vectors_fil
             f.write("%s\n" % item)
     print("- done. " + str(len(oov_words)) + " tokens")
 
-    subprocess.call("oov_generator.sh", shell=True)
+    subprocess.call(os.path.join(ROOT_DIR, "oov_generator.sh"), shell=True)
 
 def export_trimmed_fasttext_vectors(word_to_idx, idx_to_word, fasttext_filename, trimmed_filename, dim, oov_vectors_filename,
                                     use_fasttext_oov_vector_gen=False):
