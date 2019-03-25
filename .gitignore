@@ -1,3 +1,6 @@
 data/
 results/
 fasttext/
+.idea/
+*.pyc
+model/__pycache__/

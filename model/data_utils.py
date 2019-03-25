@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import subprocess
 
 
 # shared global variables to be imported from model also
@@ -197,8 +198,18 @@ def load_vocab(filename):
         raise MyIOError(filename)
     return word_to_idx, idx_to_word
 
+def generate_fasttext_oov_vectors(oov_words, oov_words_filename, oov_vectors_filename):
 
-def export_trimmed_fasttext_vectors(word_to_idx, idx_to_word, fasttext_filename, trimmed_filename, dim, use_fasttext_oov_vector_gen=False):
+    print("Writing to oov words file")
+    with open(oov_words_filename, 'w') as f:
+        for item in oov_words:
+            f.write("%s\n" % item)
+    print("- done. " + str(len(oov_words)) + " tokens")
+
+    subprocess.call("oov_generator.sh", shell=True)
+
+def export_trimmed_fasttext_vectors(word_to_idx, idx_to_word, fasttext_filename, trimmed_filename, dim, oov_vectors_filename,
+                                    use_fasttext_oov_vector_gen=False):
     """Saves fasttext vectors in numpy array
 
     Args:
@@ -218,18 +229,16 @@ def export_trimmed_fasttext_vectors(word_to_idx, idx_to_word, fasttext_filename,
                 word_idx = word_to_idx[word]
                 embeddings[word_idx] = np.asarray(embedding)
 
-    if use_fasttext_oov_vector_gen:
-        oov_count = 0
-        for i, row in enumerate(embeddings):
-            if (row == np.zeros([dim])).all():
-                oov_count += 1
-                embedding = generate_fasttext_vector(idx_to_word[i])
-                embeddings[i] = embedding
-    np.savez_compressed(trimmed_filename, embeddings=embeddings)
+    with open(oov_vectors_filename, encoding="utf8") as f:
+        for line in f:
+            line = line.strip().split(' ')
+            word = line[0]
+            embedding = [float(x) for x in line[1:]]
+            if word in word_to_idx:
+                word_idx = word_to_idx[word]
+                embeddings[word_idx] = np.asarray(embedding)
 
-def generate_fasttext_vector(word):
-    #TODO: Link with Fasttext
-    return np.zeros([300])
+    np.savez_compressed(trimmed_filename, embeddings=embeddings)
 
 def get_trimmed_fasttext_vectors(filename):
     """

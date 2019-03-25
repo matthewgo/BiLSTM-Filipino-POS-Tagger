@@ -105,3 +105,5 @@ class Config():
     use_chars = True # if char embedding, training is 3.5x slower on CPU
 
     use_fasttext_oov_vector_gen = True
+
+    filename_oov_result_vectors = fasttext_folder + 'oov_vectors.vec'

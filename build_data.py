@@ -1,7 +1,7 @@
 from model.config import Config
 from model import data_utils
 from model.data_utils import FilipinoPOSDataset, get_fasttext_vocab, get_vocabs, UNK, NUM, write_vocab, load_vocab,\
-                            export_trimmed_fasttext_vectors, get_char_vocab
+                            export_trimmed_fasttext_vectors, get_char_vocab, generate_fasttext_oov_vectors
 
 def main():
     config = Config(load=False)
@@ -24,6 +24,10 @@ def main():
     vocab.add(UNK)
     vocab.add(NUM)
 
+    oov_words = vocab_words - vocab_fasttext
+    generate_fasttext_oov_vectors(oov_words, config.filename_oov_words, config.filename_oov_result_vectors)
+
+
     # Save vocab
     write_vocab(vocab, config.filename_words)
     write_vocab(vocab_tags, config.filename_tags)
@@ -31,7 +35,8 @@ def main():
     #Trim and (insert new) Fasttext vectors
     word_to_idx, idx_to_word = load_vocab(config.filename_words)
     export_trimmed_fasttext_vectors(word_to_idx, idx_to_word, config.filename_fasttext,
-                                config.filename_fasttext_trimmed, config.dim_word, config.use_fasttext_oov_vector_gen)
+                                config.filename_fasttext_trimmed, config.dim_word, config.filename_oov_results_vector,
+                                    config.use_fasttext_oov_vector_gen)
 
     # Build and save char vocab
     train = FilipinoPOSDataset(config.filename_train)
