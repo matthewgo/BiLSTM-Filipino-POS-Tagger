@@ -1,4 +1,4 @@
-from model.data_utils import FilipinoPOSDataset
+from model.data_utils import Dataset
 from model.tagger_model import TaggerModel
 from model.config import Config
 
@@ -12,10 +12,10 @@ def main():
     # model.restore_session("results/crf/model.weights/") # optional, restore weights
     # model.reinitialize_weights("proj")
 
-    dev = FilipinoPOSDataset(config.filename_dev, config.processing_word,
-                       config.processing_tag, config.max_iter)
-    train = FilipinoPOSDataset(config.filename_train, config.processing_word,
-                         config.processing_tag, config.max_iter)
+    dev = Dataset(config.filename_dev, config.processing_word,
+                  config.processing_tag, config.max_iter)
+    train = Dataset(config.filename_train, config.processing_word,
+                    config.processing_tag, config.max_iter)
 
     model.train(train, dev)
 

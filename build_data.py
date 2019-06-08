@@ -1,6 +1,6 @@
 from model.config import Config
 from model import data_utils
-from model.data_utils import FilipinoPOSDataset, get_fasttext_vocab, get_vocabs, UNK, NUM, write_vocab, load_vocab,\
+from model.data_utils import Dataset, get_fasttext_vocab, get_vocabs, UNK, NUM, write_vocab, load_vocab,\
                             export_trimmed_fasttext_vectors, get_char_vocab, generate_fasttext_oov_vectors
 
 def main():
@@ -8,9 +8,9 @@ def main():
     processing_word = data_utils.get_processing_word(lowercase=True)
 
     #Datasets
-    test = FilipinoPOSDataset(config.filename_test, processing_word=processing_word)
-    dev = FilipinoPOSDataset(config.filename_dev, processing_word=processing_word)
-    train = FilipinoPOSDataset(config.filename_train, processing_word=processing_word)
+    test = Dataset(config.filename_test, processing_word=processing_word)
+    dev = Dataset(config.filename_dev, processing_word=processing_word)
+    train = Dataset(config.filename_train, processing_word=processing_word)
 
     # Vocab Generators
     vocab_words, vocab_tags = get_vocabs([train, dev, test])
@@ -39,7 +39,7 @@ def main():
                                     config.use_fasttext_oov_vector_gen)
 
     # Build and save char vocab
-    train = FilipinoPOSDataset(config.filename_train)
+    train = Dataset(config.filename_train)
     vocab_chars = get_char_vocab(train)
     write_vocab(vocab_chars, config.filename_chars)
 

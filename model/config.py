@@ -68,24 +68,24 @@ class Config():
 
     #fastText files
     fasttext_folder = os.path.join(ROOT_DIR, 'data/fasttext-filipino/')
-    filename_fasttext= fasttext_folder + "cc.tl.300.vec"
-    filename_fasttext_trimmed = fasttext_folder + "cc.tl.300.vec.trimmed.npz"
+    filename_fasttext= os.path.join(fasttext_folder, "cc.tl.300.vec")
+    filename_fasttext_trimmed = os.path.join(fasttext_folder + "cc.tl.300.vec.trimmed.npz")
     use_pretrained = True
 
     # dataset
     folder = os.path.join(ROOT_DIR, "data/filipino-pos/")
-    filename_dev = folder + 'dev.txt'
-    filename_test = folder + 'test.txt'
-    filename_train = folder + 'train.txt'
+    filename_dev = os.path.join(folder, 'dev.txt')
+    filename_test = os.path.join(folder, 'test.txt')
+    filename_train = os.path.join(folder, 'train.txt')
 
 
     max_iter = None # if not None, max number of examples in Dataset
 
     # vocab (created from dataset with build_data.py)
-    filename_words = folder + "words.txt"
-    filename_oov_words = folder + "oov_words.txt"
-    filename_tags = folder + "tags.txt"
-    filename_chars = folder + "chars.txt"
+    filename_words = os.path.join(folder, "words.txt")
+    filename_oov_words = os.path.join(folder, "oov_words.txt")
+    filename_tags = os.path.join(folder, "tags.txt")
+    filename_chars = os.path.join(folder, "chars.txt")
 
     # training
     train_embeddings = False

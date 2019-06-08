@@ -1,4 +1,4 @@
-from model.data_utils import FilipinoPOSDataset
+from model.data_utils import Dataset
 from model.tagger_model import TaggerModel
 from model.config import Config
 
@@ -76,8 +76,8 @@ def main():
     model.restore_session(config.dir_model)
 
     # create dataset
-    test  = FilipinoPOSDataset(config.filename_test, config.processing_word,
-                         config.processing_tag, config.max_iter)
+    test  = Dataset(config.filename_test, config.processing_word,
+                    config.processing_tag, config.max_iter)
 
     # evaluate and interact
     model.evaluate(test)

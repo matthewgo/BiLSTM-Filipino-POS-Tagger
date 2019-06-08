@@ -24,7 +24,7 @@ trimm your word vectors.
         super(MyIOError, self).__init__(message)
 
 
-class FilipinoPOSDataset(object):
+class Dataset(object):
     """Class that iterates over Filipino POS Dataset
 
     __iter__ method yields a tuple (words, tags)
@@ -209,8 +209,7 @@ def generate_fasttext_oov_vectors(oov_words, oov_words_filename, oov_vectors_fil
 
     subprocess.call(os.path.join(ROOT_DIR, "oov_generator.sh"), shell=True)
 
-def export_trimmed_fasttext_vectors(word_to_idx, idx_to_word, fasttext_filename, trimmed_filename, dim, oov_vectors_filename,
-                                    use_fasttext_oov_vector_gen=False):
+def export_trimmed_fasttext_vectors(word_to_idx, fasttext_filename, trimmed_filename, dim, oov_vectors_filename):
     """Saves fasttext vectors in numpy array
 
     Args:
