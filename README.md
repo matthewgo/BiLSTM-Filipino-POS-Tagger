@@ -2,8 +2,8 @@ Based on BiLSTM Sequence Tagging Tensorflow implementation of Guillaume Genthial
 https://github.com/guillaumegenthial/sequence_tagging
 
 
-##BiLSTM + Conditional Random Fields + Char Embeddings + FastText Word Vectors 
-####For NER, POS Tagging or any Sequence Tagging Tasks.
+## BiLSTM + Conditional Random Fields + Char Embeddings + FastText Word Vectors 
+#### For NER, POS Tagging or any Sequence Tagging Tasks.
 Some data paths in model/config.py and oov_generator.sh is currently hardcoded to work with Filipino data tested in my local machine.
 
 **Requirements:**
